@@ -1,3 +1,5 @@
+import fetch from 'node-fetch';
+
 const MODEL_ID = 'face-detection';
 const returnClarifaiRequestOptions = (imageUrl) => {
   const PAT = '6a937bf6d44f4a9597af2fac9be9f8e5';
