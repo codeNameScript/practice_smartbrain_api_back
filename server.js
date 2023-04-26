@@ -9,6 +9,8 @@ const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
+const nodeFetch = require('node-fetch');
+
 const db = knex({
     client: 'pg',
     connection: {
@@ -40,7 +42,7 @@ app.get('/profile/:id', (req, res) => profile.handleProfile(req, res, db))
 
 app.put('/image', (req, res) => image.handleImage(req, res, db))
 
-app.post('/imageurl', (req, res) => image.handleApiCall(req, res))
+app.post('/imageurl', (req, res) => image.handleApiCall(req, res, nodeFetch))
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
