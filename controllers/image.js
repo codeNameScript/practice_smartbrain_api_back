@@ -33,8 +33,8 @@ const returnClarifaiRequestOptions = (imageUrl) => {
   return requestOptions;
 }
 
-const handleApiCall = (req, res, fetch) => {
-    fetch.fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", returnClarifaiRequestOptions(req.body.input))
+const handleApiCall = (req, res) => {
+    fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", returnClarifaiRequestOptions(req.body.input))
     .then(response => response.json())
     .then(data => {
         res.json(data)
