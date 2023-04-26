@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "nodemon"
+    "start": "node server.js"
   },
   "name": "practice_smartbran-api",
   "version": "1.0.0",
