@@ -1,13 +1,13 @@
-const express = require('express');
+import express, { json } from 'express';
 const app = express();
-const bcrypt = require('bcrypt-nodejs');
-const cors = require('cors');
-const knex = require('knex');
+import bcrypt from 'bcrypt-nodejs';
+import cors from 'cors';
+import knex from 'knex';
 
-const register = require('./controllers/register');
-const signin = require('./controllers/signin');
-const profile = require('./controllers/profile');
-const image = require('./controllers/image');
+import { handleRegister } from './controllers/register';
+import { handleSignin } from './controllers/signin';
+import { handleProfile } from './controllers/profile';
+import { handleImage, handleApiCall } from './controllers/image';
 
 import nodeFetch from 'node-fetch';
 
@@ -24,7 +24,7 @@ const db = knex({
     }
 });
 
-app.use(express.json());
+app.use(json());
 app.use(cors());
 
 app.get('/', (req, res) => {
@@ -34,15 +34,15 @@ app.get('/', (req, res) => {
     })
 })
 
-app.post('/signin', signin.handleSignin(db, bcrypt))
+app.post('/signin', handleSignin(db, bcrypt))
 
-app.post('/register', (req, res) => register.handleRegister(req, res, db, bcrypt))
+app.post('/register', (req, res) => handleRegister(req, res, db, bcrypt))
 
-app.get('/profile/:id', (req, res) => profile.handleProfile(req, res, db))
+app.get('/profile/:id', (req, res) => handleProfile(req, res, db))
 
-app.put('/image', (req, res) => image.handleImage(req, res, db))
+app.put('/image', (req, res) => handleImage(req, res, db))
 
-app.post('/imageurl', (req, res) => image.handleApiCall(req, res, nodeFetch))
+app.post('/imageurl', (req, res) => handleApiCall(req, res, nodeFetch))
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
