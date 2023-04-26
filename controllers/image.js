@@ -38,7 +38,6 @@ export const handleApiCall = (req, res, nodeFetch) => {
     .then(response => response.json())
     .then(data => {
         res.json(data)
-        console.log(data)
     })
     .catch(err => res.status(400).json('unable to work with API'))
 }
