@@ -1,4 +1,4 @@
-const handleRegister = (req, res, db, bcrypt) => {
+export const handleRegister = (req, res, db, bcrypt) => {
     const { email, name, password } = req.body;
     
     if (!email || !name || !password) {
@@ -32,8 +32,4 @@ const handleRegister = (req, res, db, bcrypt) => {
         .then(trx.commit)
         .catch(trx.rollback)
     })
-}
-
-module.exports = {
-    handleRegister: handleRegister
 }
